@@ -5,6 +5,7 @@ import { useAppSelector } from "@/state/hooks";
 import ParallaxScrollView from "@/components/ParallaxScrollView";
 import { ThemedText } from "@/components/ThemedText";
 import { ThemedView } from "@/components/ThemedView";
+import { RecipeCard } from "@/components/RecipeCard";
 
 export default function RecipesScreen() {
     const recipes = useAppSelector((state) => state.recipes.recipes);
@@ -21,18 +22,7 @@ export default function RecipesScreen() {
         >
             <ThemedView style={styles.titleContainer}>
                 {recipes && recipes.length > 0 ? (
-                    recipes.map((recipe) => (
-                        <>
-                            <ThemedText type="title">{recipe.name}</ThemedText>
-
-                            {recipe.ingredients.map((ingredient) => (
-                                <Text>{ingredient}</Text>
-                            ))}
-
-                            <ThemedText type="subtitle">Method:</ThemedText>
-                            <Text>{recipe.method}</Text>
-                        </>
-                    ))
+                    recipes.map((recipe) => <RecipeCard recipe={recipe} />)
                 ) : (
                     <ThemedText type="title">No Recipes here!</ThemedText>
                 )}
