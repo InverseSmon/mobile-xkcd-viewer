@@ -1,60 +1,50 @@
-// recipesSlice.ts
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+// // recipesSlice.ts
+// import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
-export type Recipe = {
-    name: String;
-    ingredients: String[];
-    method: String;
-};
+// export type Comic = {
+//     month: string;
+//     num: number;
+//     link: string;
+//     year: string;
+//     news: string;
+//     safe_title: string;
+//     transcript: string;
+//     alt: string;
+//     img: string;
+//     title: string;
+//     day: string;
+// };
 
-interface RecipesState {
-    recipes: Recipe[];
-    name: string;
-    ingredients: string[];
-    method: string;
-}
+// interface ComicState {
+//     comic: Comic;
+// }
 
-const initialState: RecipesState = {
-    recipes: [],
-    name: "",
-    ingredients: [],
-    method: "",
-};
+// const initialState: ComicState = {
+//     comic: {
+//         month: "",
+//         num: 0,
+//         link: "",
+//         year: "",
+//         news: "",
+//         safe_title: "",
+//         transcript: "",
+//         alt: "",
+//         img: "",
+//         title: "",
+//         day: "",
+//     },
+// };
 
-export const recipesSlice = createSlice({
-    name: "recipes",
-    initialState,
-    reducers: {
-        addRecipe: (state, action: PayloadAction<Recipe>) => {
-            state.recipes.push(action.payload);
-        },
-        addName: (state, action: PayloadAction<string>) => {
-            state.name = action.payload;
-        },
-        addIngredient: (state, action: PayloadAction<string>) => {
-            state.ingredients.push(action.payload);
-        },
-        removeIngredient: (state, action: PayloadAction<string>) => {
-            state.ingredients = state.ingredients.filter(
-                (ingredient) => ingredient !== action.payload
-            );
-        },
-        clearIngredients: (state) => {
-            state.ingredients = [];
-        },
-        addMethod: (state, action: PayloadAction<string>) => {
-            state.method = action.payload;
-        },
-    },
-});
+// export const comicSlice = createSlice({
+//     name: "comic",
+//     initialState,
+//     reducers: {
+//         addComic: (state, action: PayloadAction<Comic>) => {
+//             state.comic = action.payload
+//     },
+// },
+// });
 
-export const {
-    addRecipe,
-    addName,
-    addIngredient,
-    removeIngredient,
-    clearIngredients,
-    addMethod,
-} = recipesSlice.actions;
+// export const { addComic } = comicSlice.actions;
 
-export default recipesSlice.reducer;
+// export default comicSlice.reducer;

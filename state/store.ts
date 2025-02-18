@@ -1,10 +1,10 @@
 // store.ts
 import { configureStore } from "@reduxjs/toolkit";
-import recipesReducer from "./recipesSlice";
+import comicReducer from "./comicSlice";
 
 export const store = configureStore({
     reducer: {
-        recipes: recipesReducer,
+        comic: comicReducer,
     },
 });
 

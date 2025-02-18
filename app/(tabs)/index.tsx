@@ -5,75 +5,41 @@ import ParallaxScrollView from "@/components/ParallaxScrollView";
 import { ThemedText } from "@/components/ThemedText";
 import { ThemedView } from "@/components/ThemedView";
 import { Button } from "@/components/Button";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
+import { View } from "react-native";
 import { useAppDispatch, useAppSelector } from "@/state/hooks";
 import { RootState, AppDispatch } from "@/state/store";
-import { addRecipe } from "@/state/recipesSlice";
-export default function HomeScreen() {
-    const recipes = useAppSelector((state: RootState) => state.recipes.recipes);
+import { addComic, setLatestComic } from "@/state/comicSlice";
+import { ComicPanel } from "@/components/ComicPanel";
+import { ComicContainer } from "@/components/ComicContainer";
 
+export default function HomeScreen() {
+    const comic = useAppSelector((state: RootState) => state.comic.comic);
     const dispatch = useAppDispatch();
-    const onPress = () => {
-        console.log("Adding recipe");
-    };
+
+    useEffect(() => {
+        const fetchComic = async () => {
+            try {
+                const response = await fetch("https://xkcd.com/info.0.json");
+                if (!response.ok) {
+                    throw new Error("Network response was not ok");
+                }
+                const data = await response.json();
+                dispatch(addComic(data));
+                dispatch(setLatestComic(data.num));
+            } catch (error) {
+                console.error("Fetching comic failed:", error);
+            }
+        };
+
+        fetchComic();
+    }, [dispatch]);
 
     return (
-        <ParallaxScrollView
-            headerBackgroundColor={{ light: "#A1CEDC", dark: "#1D3D47" }}
-            headerImage={
-                <Image
-                    source={require("@/assets/images/recipe_image.jpg")}
-                    style={styles.reactLogo}
-                />
-            }
-        >
-            <ThemedView style={styles.titleContainer}>
-                <ThemedText type="title">Hello!</ThemedText>
-                <Button title="Button" onPress={onPress} />
-                <HelloWave />
-            </ThemedView>
-            <ThemedView style={styles.stepContainer}>
-                <ThemedText type="subtitle">Step 1: Try it</ThemedText>
-                <ThemedText>
-                    Edit{" "}
-                    <ThemedText type="defaultSemiBold">
-                        app/(tabs)/index.tsx
-                    </ThemedText>{" "}
-                    to see changes. Press{" "}
-                    <ThemedText type="defaultSemiBold">
-                        {Platform.select({
-                            ios: "cmd + d",
-                            android: "cmd + m",
-                            web: "F12",
-                        })}
-                    </ThemedText>{" "}
-                    to open developer tools.
-                </ThemedText>
-            </ThemedView>
-            <ThemedView style={styles.stepContainer}>
-                <ThemedText type="subtitle">Step 2: Explore</ThemedText>
-                <ThemedText>
-                    Tap the Explore tab to learn more about what's included in
-                    this starter app.
-                </ThemedText>
-            </ThemedView>
-            <ThemedView style={styles.stepContainer}>
-                <ThemedText type="subtitle">
-                    Step 3: Get a fresh start
-                </ThemedText>
-                <ThemedText>
-                    When you're ready, run{" "}
-                    <ThemedText type="defaultSemiBold">
-                        npm run reset-project
-                    </ThemedText>{" "}
-                    to get a fresh{" "}
-                    <ThemedText type="defaultSemiBold">app</ThemedText>{" "}
-                    directory. This will move the current{" "}
-                    <ThemedText type="defaultSemiBold">app</ThemedText> to{" "}
-                    <ThemedText type="defaultSemiBold">app-example</ThemedText>.
-                </ThemedText>
-            </ThemedView>
-        </ParallaxScrollView>
+        <View style={styles.main}>
+            <ThemedText type="title">XKCD</ThemedText>
+            <ComicContainer />
+        </View>
     );
 }
 
@@ -93,5 +59,12 @@ const styles = StyleSheet.create({
         bottom: 0,
         left: 0,
         position: "absolute",
+    },
+    main: {
+        paddingTop: 85,
+        flex: 1,
+        justifyContent: "flex-start",
+        alignItems: "center",
+        backgroundColor: "#f0f0f0",
     },
 });
