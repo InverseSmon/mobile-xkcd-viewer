@@ -1,4 +1,4 @@
-import { Image, StyleSheet, Platform } from "react-native";
+import { Text, StyleSheet, Platform } from "react-native";
 
 import { HelloWave } from "@/components/HelloWave";
 import ParallaxScrollView from "@/components/ParallaxScrollView";
@@ -37,7 +37,7 @@ export default function HomeScreen() {
 
     return (
         <View style={styles.main}>
-            <ThemedText type="title">XKCD</ThemedText>
+            <Text style={styles.title}>XKCD</Text>
             <ComicContainer />
         </View>
     );
@@ -66,5 +66,10 @@ const styles = StyleSheet.create({
         justifyContent: "flex-start",
         alignItems: "center",
         backgroundColor: "#f0f0f0",
+    },
+    title: {
+        fontFamily: "XkcdScript",
+        fontSize: 42,
+        // marginBottom: 8,
     },
 });

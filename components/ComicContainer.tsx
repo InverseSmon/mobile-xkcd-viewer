@@ -4,7 +4,7 @@ import { ThemedText } from "./ThemedText";
 import { Comic } from "@/state/comicSlice";
 import { ComicPanel } from "./ComicPanel";
 import { Button } from "./Button";
-import { ComicButtons } from "./ComicButtons";
+import { ComicButtons, ZoomButton } from "./ComicButtons";
 
 import { useAppDispatch, useAppSelector } from "@/state/hooks";
 import { RootState } from "@/state/store";
@@ -20,14 +20,16 @@ export function ComicContainer() {
         <>
             {comic ? (
                 <View style={styles.container}>
-                    <ThemedText type="default">#{comic.num}</ThemedText>
-                    <ThemedText type="default">{comic.title}</ThemedText>
+                    <Text style={styles.subtitle}>
+                        #{comic.num} {comic.title}
+                    </Text>
                     <ComicPanel comic={comic} />
-                    <ThemedText type="default">
+                    {/* <ThemedText type="default">
                         Permanent link to this comic: {link}
-                    </ThemedText>
+                    </ThemedText> */}
                 </View>
             ) : null}
+            <ZoomButton />
             <ComicButtons />
         </>
     );
@@ -36,8 +38,15 @@ export function ComicContainer() {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        justifyContent: "flex-start",
+        justifyContent: "space-around",
         alignItems: "center",
         height: "80%",
+        width: "100%",
+    },
+    subtitle: {
+        fontFamily: "Lucida",
+        fontVariant: ["small-caps"],
+        fontWeight: "bold",
+        fontSize: 25,
     },
 });
