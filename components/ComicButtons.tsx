@@ -4,7 +4,7 @@ import { Button } from "./Button";
 
 import { useAppDispatch, useAppSelector } from "@/state/hooks";
 import { RootState } from "@/state/store";
-import { addComic, toggleZoom, setZoomFalse } from "@/state/comicSlice";
+import { addComic } from "@/state/comicSlice";
 
 export function ComicButtons() {
     const dispatch = useAppDispatch();
@@ -49,7 +49,6 @@ export function ComicButtons() {
 
     const fetchFirstComic = () => {
         fetchSpecificComic(1);
-        dispatch(setZoomFalse());
     };
 
     const fetchPreviousComic = () => {
@@ -57,7 +56,6 @@ export function ComicButtons() {
             return;
         }
         fetchSpecificComic(comic.num - 1);
-        dispatch(setZoomFalse());
     };
 
     const fetchNextComic = () => {
@@ -68,18 +66,15 @@ export function ComicButtons() {
             return;
         }
         fetchSpecificComic(comic.num + 1);
-        dispatch(setZoomFalse());
     };
 
     const fetchLatestComic = () => {
         fetchLatest();
-        dispatch(setZoomFalse());
     };
 
     const fetchRandomComic = () => {
         const number = Math.floor(Math.random() * latestComic) + 1;
         fetchSpecificComic(number);
-        dispatch(setZoomFalse());
     };
 
     return (
@@ -118,35 +113,6 @@ export function ComicButtons() {
     );
 }
 
-export function ZoomButton() {
-    const dispatch = useAppDispatch();
-    const zoom = useAppSelector((state: RootState) => state.comic.zoom);
-
-    const toggleZoomButton = () => {
-        dispatch(toggleZoom());
-    };
-
-    return (
-        <>
-            {zoom ? (
-                <Button
-                    buttonStyle={styles.zoomButton}
-                    textStyle={styles.zoomButtonText}
-                    title="-"
-                    onPress={toggleZoomButton}
-                />
-            ) : (
-                <Button
-                    buttonStyle={styles.zoomButton}
-                    textStyle={styles.zoomButtonText}
-                    title="+"
-                    onPress={toggleZoomButton}
-                />
-            )}
-        </>
-    );
-}
-
 const styles = StyleSheet.create({
     container: {
         flexDirection: "row",
@@ -170,24 +136,6 @@ const styles = StyleSheet.create({
         fontVariant: ["small-caps"],
         fontWeight: "bold",
         fontSize: 25,
-        textAlign: "center",
-        color: "white",
-    },
-    zoomButton: {
-        height: 60,
-        width: 60,
-        backgroundColor: "#6B7089",
-        justifyContent: "center",
-        alignItems: "center",
-        borderRadius: 50,
-        borderWidth: 1,
-        borderColor: "black",
-    },
-    zoomButtonText: {
-        fontFamily: "Lucida",
-        fontVariant: ["small-caps"],
-        fontWeight: "bold",
-        fontSize: 40,
         textAlign: "center",
         color: "white",
     },

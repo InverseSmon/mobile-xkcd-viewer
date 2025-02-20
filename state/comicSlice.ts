@@ -17,13 +17,11 @@ export type Comic = {
 interface ComicState {
     comic: Comic | null;
     latestComic: number;
-    zoom: boolean;
 }
 
 const initialState: ComicState = {
     comic: null,
     latestComic: 0,
-    zoom: false,
 };
 
 export const comicSlice = createSlice({
@@ -36,16 +34,9 @@ export const comicSlice = createSlice({
         setLatestComic: (state, action: PayloadAction<number>) => {
             state.latestComic = action.payload;
         },
-        toggleZoom: (state) => {
-            state.zoom = !state.zoom;
-        },
-        setZoomFalse: (state) => {
-            state.zoom = false;
-        },
     },
 });
 
-export const { addComic, setLatestComic, toggleZoom, setZoomFalse } =
-    comicSlice.actions;
+export const { addComic, setLatestComic } = comicSlice.actions;
 
 export default comicSlice.reducer;

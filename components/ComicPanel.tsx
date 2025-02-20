@@ -1,38 +1,51 @@
-import React from "react";
-import { View, Image, StyleSheet, ScrollView } from "react-native";
+import React, { useState, useEffect } from "react";
+import {
+    View,
+    Image,
+    StyleSheet,
+    ScrollView,
+    Dimensions,
+    ScaledSize,
+} from "react-native";
 import { Comic } from "@/state/comicSlice";
 import { useAppDispatch, useAppSelector } from "@/state/hooks";
+import ZoomWrapper from "@ngenux/react-native-pinch-zoom-view";
 
 export const ComicPanel: React.FC<{ comic: Comic }> = ({ comic }) => {
-    const zoom = useAppSelector((state) => state.comic.zoom);
+    const [windowDimensions, setWindowDimensions] = useState(
+        Dimensions.get("window")
+    );
+
+    useEffect(() => {
+        const onChange = ({ window }: { window: ScaledSize }) => {
+            setWindowDimensions((prevDimensions) => ({
+                ...prevDimensions,
+                ...window,
+            }));
+        };
+
+        const dimensionsListener = Dimensions.addEventListener(
+            "change",
+            onChange
+        );
+        return () => dimensionsListener.remove();
+    }, []);
 
     return (
-        <>
-            {zoom ? (
-                <ScrollView>
-                    <ScrollView
-                        contentContainerStyle={styles.scrollContainer}
-                        maximumZoomScale={3}
-                        minimumZoomScale={1}
-                        horizontal={true}
-                    >
-                        <Image
-                            source={{ uri: comic.img }}
-                            alt={comic.alt}
-                            style={styles.zoomedImage}
-                        />
-                    </ScrollView>
-                </ScrollView>
-            ) : (
-                <View style={styles.container}>
-                    <Image
-                        source={{ uri: comic.img }}
-                        alt={comic.alt}
-                        style={styles.image}
-                    />
-                </View>
-            )}
-        </>
+        <View style={styles.container}>
+            <ZoomWrapper
+                style={styles.zoomElement}
+                minZoom={1}
+                maxZoom={5}
+                zoomLevels={[]}
+            >
+                <Image
+                    source={{ uri: comic.img }}
+                    style={styles.image}
+                    width={windowDimensions.width}
+                />
+            </ZoomWrapper>
+        </View>
     );
 };
 
@@ -41,10 +54,11 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent: "center",
         alignItems: "center",
-        height: "80%",
     },
     image: {
-        width: "95%",
+        // width: "100%",
+        width: 500,
+        maxWidth: "98%",
         aspectRatio: 1,
         resizeMode: "contain",
     },
@@ -53,16 +67,9 @@ const styles = StyleSheet.create({
         justifyContent: "center",
         alignItems: "center",
     },
-    // zoomedImage: {
-    //     height: 1000,
-    //     overflowX: "scroll",
-    //     overflowY: "scroll",
-    //     aspectRatio: 1,
-    //     resizeMode: "contain",
-    // },
-    zoomedImage: {
-        width: 900,
-        height: 900,
-        resizeMode: "contain",
+    zoomElement: {
+        // position: "absolute",
+        width: "100%",
+        height: "100%",
     },
 });

@@ -1,10 +1,10 @@
 import React, { useRef } from "react";
-import { View, Text, StyleSheet } from "react-native";
+import { View, Text, StyleSheet, Linking } from "react-native";
 import { ThemedText } from "./ThemedText";
 import { Comic } from "@/state/comicSlice";
 import { ComicPanel } from "./ComicPanel";
 import { Button } from "./Button";
-import { ComicButtons, ZoomButton } from "./ComicButtons";
+import { ComicButtons } from "./ComicButtons";
 
 import { useAppDispatch, useAppSelector } from "@/state/hooks";
 import { RootState } from "@/state/store";
@@ -14,7 +14,7 @@ export function ComicContainer() {
     const comic = useAppSelector((state: RootState) => state.comic.comic);
     const dispatch = useAppDispatch();
 
-    const link = !comic ? null : "https://xkcd.com/" + comic.num + "/";
+    // const link = "https://xkcd.com/" + comic.num + "/";
 
     return (
         <>
@@ -24,13 +24,20 @@ export function ComicContainer() {
                         #{comic.num} {comic.title}
                     </Text>
                     <ComicPanel comic={comic} />
-                    {/* <ThemedText type="default">
-                        Permanent link to this comic: {link}
-                    </ThemedText> */}
+
+                    <Text
+                        style={styles.link}
+                        onPress={() =>
+                            Linking.openURL(
+                                "https://xkcd.com/" + comic.num + "/"
+                            )
+                        }
+                    >
+                        Link
+                    </Text>
+                    <ComicButtons />
                 </View>
             ) : null}
-            <ZoomButton />
-            <ComicButtons />
         </>
     );
 }
@@ -38,9 +45,9 @@ export function ComicContainer() {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        justifyContent: "space-around",
+        justifyContent: "flex-start",
         alignItems: "center",
-        height: "80%",
+        height: "0%",
         width: "100%",
     },
     subtitle: {
@@ -48,5 +55,13 @@ const styles = StyleSheet.create({
         fontVariant: ["small-caps"],
         fontWeight: "bold",
         fontSize: 25,
+        margin: 20,
+    },
+    link: {
+        fontFamily: "Lucida",
+        fontVariant: ["small-caps"],
+        fontWeight: "bold",
+        fontSize: 20,
+        color: "blue",
     },
 });

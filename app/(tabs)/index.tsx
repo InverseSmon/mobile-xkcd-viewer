@@ -10,7 +10,7 @@ import { View } from "react-native";
 import { useAppDispatch, useAppSelector } from "@/state/hooks";
 import { RootState, AppDispatch } from "@/state/store";
 import { addComic, setLatestComic } from "@/state/comicSlice";
-import { ComicPanel } from "@/components/ComicPanel";
+import { Banner } from "@/components/Banner";
 import { ComicContainer } from "@/components/ComicContainer";
 
 export default function HomeScreen() {
@@ -37,7 +37,7 @@ export default function HomeScreen() {
 
     return (
         <View style={styles.main}>
-            <Text style={styles.title}>XKCD</Text>
+            <Banner />
             <ComicContainer />
         </View>
     );
@@ -61,11 +61,11 @@ const styles = StyleSheet.create({
         position: "absolute",
     },
     main: {
-        paddingTop: 85,
         flex: 1,
         justifyContent: "flex-start",
         alignItems: "center",
         backgroundColor: "#f0f0f0",
+        marginTop: 24,
     },
     title: {
         fontFamily: "XkcdScript",
