@@ -17,11 +17,13 @@ export type Comic = {
 interface ComicState {
     comic: Comic | null;
     latestComic: number;
+    comicNumberInput: string;
 }
 
 const initialState: ComicState = {
     comic: null,
     latestComic: 0,
+    comicNumberInput: "",
 };
 
 export const comicSlice = createSlice({
@@ -34,9 +36,13 @@ export const comicSlice = createSlice({
         setLatestComic: (state, action: PayloadAction<number>) => {
             state.latestComic = action.payload;
         },
+        setComicNumberInput: (state, action: PayloadAction<string>) => {
+            state.comicNumberInput = action.payload;
+        },
     },
 });
 
-export const { addComic, setLatestComic } = comicSlice.actions;
+export const { addComic, setLatestComic, setComicNumberInput } =
+    comicSlice.actions;
 
 export default comicSlice.reducer;

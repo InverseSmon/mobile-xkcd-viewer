@@ -36,7 +36,7 @@ export default function TabLayout() {
                     ),
                 }}
             />
-            <Tabs.Screen
+            {/* <Tabs.Screen
                 name="explore"
                 options={{
                     title: "Add Recipes",
@@ -57,7 +57,7 @@ export default function TabLayout() {
                         <BookSymbol size={28} name="book.fill" color={color} />
                     ),
                 }}
-            />
+            /> */}
         </Tabs>
     );
 }

@@ -14,8 +14,6 @@ export function ComicContainer() {
     const comic = useAppSelector((state: RootState) => state.comic.comic);
     const dispatch = useAppDispatch();
 
-    // const link = "https://xkcd.com/" + comic.num + "/";
-
     return (
         <>
             {comic ? (
@@ -24,17 +22,6 @@ export function ComicContainer() {
                         #{comic.num} {comic.title}
                     </Text>
                     <ComicPanel comic={comic} />
-
-                    <Text
-                        style={styles.link}
-                        onPress={() =>
-                            Linking.openURL(
-                                "https://xkcd.com/" + comic.num + "/"
-                            )
-                        }
-                    >
-                        Link
-                    </Text>
                     <ComicButtons />
                 </View>
             ) : null}
@@ -55,7 +42,7 @@ const styles = StyleSheet.create({
         fontVariant: ["small-caps"],
         fontWeight: "bold",
         fontSize: 25,
-        margin: 20,
+        margin: 5,
     },
     link: {
         fontFamily: "Lucida",
@@ -63,5 +50,6 @@ const styles = StyleSheet.create({
         fontWeight: "bold",
         fontSize: 20,
         color: "blue",
+        textDecorationLine: "underline",
     },
 });
