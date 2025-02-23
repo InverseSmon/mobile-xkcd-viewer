@@ -1,50 +1,50 @@
 {
-  "expo": {
-    "name": "xkcd-viewer",
-    "slug": "xkcd-viewer",
-    "version": "1.0.0",
-    "orientation": "portrait",
-    "icon": "./assets/images/XkcdIcon.png",
-    "scheme": "myapp",
-    "userInterfaceStyle": "automatic",
-    "newArchEnabled": true,
-    "ios": {
-      "supportsTablet": true
-    },
-    "android": {
-      "adaptiveIcon": {
-        "foregroundImage": "./assets/images/XkcdIcon.png",
-        "backgroundColor": "#ffffff"
-      },
-      "package": "com.solomonmods.xkcdviewer"
-    },
-    "web": {
-      "bundler": "metro",
-      "output": "static",
-      "favicon": "./assets/images/favicon.png"
-    },
-    "plugins": [
-      "expo-router",
-      [
-        "expo-splash-screen",
-        {
-          "image": "./assets/images/XkcdIcon.png",
-          "imageWidth": 200,
-          "resizeMode": "contain",
-          "backgroundColor": "#ffffff"
+    "expo": {
+        "name": "xkcd-viewer",
+        "slug": "xkcd-viewer",
+        "version": "1.0.0",
+        "orientation": "portrait",
+        "icon": "./assets/images/xkcd-icon.png",
+        "scheme": "myapp",
+        "userInterfaceStyle": "automatic",
+        "newArchEnabled": true,
+        "ios": {
+            "supportsTablet": true
+        },
+        "android": {
+            "adaptiveIcon": {
+                "foregroundImage": "./assets/images/xkcd-adaptive-icon.png",
+                "backgroundColor": "#ffffff"
+            },
+            "package": "com.solomonmods.xkcdviewer"
+        },
+        "web": {
+            "bundler": "metro",
+            "output": "static",
+            "favicon": "./assets/images/xkcd-favicon.png"
+        },
+        "plugins": [
+            "expo-router",
+            [
+                "expo-splash-screen",
+                {
+                    "image": "./assets/images/xkcd-splash-icon.png",
+                    "imageWidth": 200,
+                    "resizeMode": "contain",
+                    "backgroundColor": "#ffffff"
+                }
+            ]
+        ],
+        "experiments": {
+            "typedRoutes": true
+        },
+        "extra": {
+            "router": {
+                "origin": false
+            },
+            "eas": {
+                "projectId": "b0e104d5-5efc-4b14-b8f5-c4e4cd036a9c"
+            }
         }
-      ]
-    ],
-    "experiments": {
-      "typedRoutes": true
-    },
-    "extra": {
-      "router": {
-        "origin": false
-      },
-      "eas": {
-        "projectId": "b0e104d5-5efc-4b14-b8f5-c4e4cd036a9c"
-      }
     }
-  }
 }

@@ -43,6 +43,7 @@ const styles = StyleSheet.create({
         fontWeight: "bold",
         fontSize: 25,
         margin: 5,
+        marginBottom: 0,
     },
     link: {
         fontFamily: "Lucida",

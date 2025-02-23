@@ -1,20 +1,13 @@
-import { Text, StyleSheet, Platform } from "react-native";
+import { StyleSheet } from "react-native";
 
-import { HelloWave } from "@/components/HelloWave";
-import ParallaxScrollView from "@/components/ParallaxScrollView";
-import { ThemedText } from "@/components/ThemedText";
-import { ThemedView } from "@/components/ThemedView";
-import { Button } from "@/components/Button";
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { View } from "react-native";
-import { useAppDispatch, useAppSelector } from "@/state/hooks";
-import { RootState, AppDispatch } from "@/state/store";
+import { useAppDispatch } from "@/state/hooks";
 import { addComic, setLatestComic } from "@/state/comicSlice";
 import { Banner } from "@/components/Banner";
 import { ComicContainer } from "@/components/ComicContainer";
 
 export default function HomeScreen() {
-    const comic = useAppSelector((state: RootState) => state.comic.comic);
     const dispatch = useAppDispatch();
 
     useEffect(() => {
@@ -70,6 +63,5 @@ const styles = StyleSheet.create({
     title: {
         fontFamily: "XkcdScript",
         fontSize: 42,
-        // marginBottom: 8,
     },
 });

@@ -75,7 +75,7 @@ export function ComicButtons() {
 
     return (
         <View style={styles.bundle}>
-            {comic ? (
+            {/* {comic ? (
                 <Text
                     style={styles.link}
                     onPress={() =>
@@ -84,7 +84,8 @@ export function ComicButtons() {
                 >
                     Link to Comic
                 </Text>
-            ) : null}
+            ) : null} */}
+            <Links />
             <View style={styles.container}>
                 <Button
                     buttonStyle={styles.button}
@@ -118,6 +119,40 @@ export function ComicButtons() {
                 />
             </View>
             <NumberInput />
+        </View>
+    );
+}
+
+export function Links() {
+    const comic = useAppSelector((state: RootState) => state.comic.comic);
+
+    return (
+        <View style={styles.links}>
+            {comic ? (
+                <>
+                    <Text
+                        style={styles.link}
+                        onPress={() =>
+                            Linking.openURL(
+                                "https://xkcd.com/" + comic.num + "/"
+                            )
+                        }
+                    >
+                        Link to Comic
+                    </Text>
+                    <Text
+                        style={styles.link}
+                        onPress={() =>
+                            Linking.openURL(
+                                "https://www.explainxkcd.com/wiki/index.php/" +
+                                    comic?.num
+                            )
+                        }
+                    >
+                        Link to Explanation
+                    </Text>
+                </>
+            ) : null}
         </View>
     );
 }
@@ -185,9 +220,10 @@ const styles = StyleSheet.create({
     },
     bundle: {
         flexDirection: "column",
-        justifyContent: "center",
+        justifyContent: "space-evenly",
         alignItems: "center",
         width: "90%",
+        paddingBottom: "3%",
     },
     button: {
         // width: "25%",
@@ -208,6 +244,12 @@ const styles = StyleSheet.create({
         textAlign: "center",
         color: "white",
     },
+    links: {
+        flexDirection: "row",
+        justifyContent: "space-evenly",
+        alignItems: "center",
+        marginBottom: "5%",
+    },
     link: {
         fontFamily: "Lucida",
         fontVariant: ["small-caps"],
@@ -215,7 +257,8 @@ const styles = StyleSheet.create({
         fontSize: 20,
         color: "blue",
         textDecorationLine: "underline",
-        marginBottom: "5%",
+        marginLeft: 10,
+        marginRight: 10,
     },
     specificComic: {
         flexDirection: "row",
