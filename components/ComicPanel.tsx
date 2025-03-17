@@ -1,12 +1,5 @@
 import React, { useState, useEffect } from "react";
-import {
-    View,
-    Image,
-    StyleSheet,
-    ScrollView,
-    Dimensions,
-    ScaledSize,
-} from "react-native";
+import { View, Image, StyleSheet, Dimensions, ScaledSize } from "react-native";
 import { Comic } from "@/state/comicSlice";
 import { useAppDispatch, useAppSelector } from "@/state/hooks";
 import ZoomWrapper from "@ngenux/react-native-pinch-zoom-view";
@@ -56,9 +49,7 @@ const styles = StyleSheet.create({
         alignItems: "center",
     },
     image: {
-        // width: "100%",
-        width: 500,
-        maxWidth: "98%",
+        width: "100%",
         aspectRatio: 1,
         resizeMode: "contain",
     },
